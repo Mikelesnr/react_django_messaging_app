@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.db.models import Subquery, OuterRef, Q
-from api.models import User, Todo, ChatMessage
+from api.models import User, Todo, ChatMessage, Profile
 
-from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer, TodoSerializer, MessageSerializer
+from api.serializer import MyTokenObtainPairSerializer, RegisterSerializer, TodoSerializer, MessageSerializer, ProfileSerializer
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -51,6 +51,7 @@ def testEndPoint(request):
 class TodoListView(generics.ListCreateAPIView):
     queryset = Todo.objects.all()
     serializer_class = TodoSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user_id = self.kwargs['user_id']
@@ -62,6 +63,7 @@ class TodoListView(generics.ListCreateAPIView):
 
 class TodoDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TodoSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_object(self):
         user_id = self.kwargs['user_id']
@@ -75,6 +77,7 @@ class TodoDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 class TodoMarkAsCompleted(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TodoSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_object(self):
         user_id = self.kwargs['user_id']
@@ -90,6 +93,7 @@ class TodoMarkAsCompleted(generics.RetrieveUpdateDestroyAPIView):
     
 class MyInbox(generics.ListAPIView):
     serializer_class = MessageSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user_id = self.kwargs['user_id']
@@ -114,6 +118,7 @@ class MyInbox(generics.ListAPIView):
     
 class GetMessages(generics.ListAPIView):
     serializer_class = ChatMessage
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         sender_id=self.kwargs['sender_id']
@@ -128,3 +133,9 @@ class GetMessages(generics.ListAPIView):
     
 class SendMessage(generics.CreateAPIView):
     serializer_class = MessageSerializer
+    permission_classes = [IsAuthenticated]
+
+class ProfileDetails(generics.RetrieveAPIView):
+    serializer_class=ProfileSerializer
+    queryset = Profile.objects.all()
+    permission_classes = [IsAuthenticated]

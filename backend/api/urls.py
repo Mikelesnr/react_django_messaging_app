@@ -21,4 +21,7 @@ urlpatterns = [
     path("my-messages/<user_id>/", views.MyInbox.as_view()),
     path("get-messages/<sender_id>/<reciever_id>/", views.GetMessages.as_view()),
     path("send-messages/", views.SendMessage.as_view()),
+
+    #profile data
+    path("profile/<int:pk>", views.ProfileDetails.as_view()),
 ]
