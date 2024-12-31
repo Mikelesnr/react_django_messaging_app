@@ -69,7 +69,8 @@ class TodoSerializer(serializers.ModelSerializer):
 
 class MessageSerializer(serializers.ModelSerializer):
     reciever_profile = ProfileSerializer(read_only=True)
+    sender_profile = ProfileSerializer(read_only=True)
 
     class Meta:
         model = ChatMessage
-        feilds = ['id','user','sender','reciever','message','is_read','date']
+        feilds = ['id','user','sender','sender_profile','reciever','reciever_profile','message','is_read','date']
