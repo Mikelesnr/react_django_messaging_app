@@ -14,7 +14,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        feilds = ['id','user','full_name','image']
+        fields = ['id','user','full_name','image']
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -73,4 +73,4 @@ class MessageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ChatMessage
-        feilds = ['id','user','sender','sender_profile','reciever','reciever_profile','message','is_read','date']
+        fields = ['id','user','sender','sender_profile','reciever','reciever_profile','message','is_read','date']

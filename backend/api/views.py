@@ -125,3 +125,6 @@ class GetMessages(generics.ListAPIView):
         )
 
         return messages
+    
+class SendMessage(generics.CreateAPIView):
+    serializer_class = MessageSerializer
