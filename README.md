@@ -1,1 +1,1 @@
-Thiss a react Django messaging app
+This a react Django messaging app
